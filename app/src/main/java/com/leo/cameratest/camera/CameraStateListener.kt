@@ -1,4 +1,4 @@
-package com.facial.facialapp.camera
+package com.leo.cameratest.camera
 
 interface CameraStateListener {
     fun onSurfaceCreated()

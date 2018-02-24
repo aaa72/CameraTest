@@ -1,4 +1,4 @@
-package com.facial.facialapp.camera
+package com.leo.cameratest.camera
 
 object CameraError {
     val NO_CAMERA_PERMISSION = 1

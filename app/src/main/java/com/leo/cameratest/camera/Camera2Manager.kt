@@ -1,4 +1,4 @@
-package com.facial.facialapp.camera
+package com.leo.cameratest.camera
 
 import android.Manifest
 import android.content.Context

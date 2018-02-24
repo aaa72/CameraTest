@@ -1,11 +1,12 @@
-package com.facial.facialapp.camera
+package com.leo.cameratest.camera
 
 import android.annotation.SuppressLint
 import android.os.Parcelable
 import android.util.Log
-import com.facial.facialapp.camera.FrameData.Companion.TAG
 import com.facial.facialapp.util.ColorFormatUtil
 import kotlinx.android.parcel.Parcelize
+
+private val TAG = "FrameData"
 
 @SuppressLint("ParcelCreator")
 @Parcelize
