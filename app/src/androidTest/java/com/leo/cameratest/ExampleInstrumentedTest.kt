@@ -1,4 +1,4 @@
-package com.leo.cameratest
+package com.facial.cameratest
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

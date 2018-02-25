@@ -1,4 +1,4 @@
-package com.leo.cameratest.widget
+package com.facial.facialapp.widget
 
 import android.content.Context
 import android.graphics.*
@@ -12,9 +12,7 @@ import android.view.SurfaceView
 import android.view.WindowManager
 import android.view.View
 import android.os.HandlerThread
-import com.facial.facialapp.camera.Camera2Manager
-import com.facial.facialapp.camera.CameraStateListener
-import com.facial.facialapp.camera.FrameCallback
+import com.facial.facialapp.camera.*
 
 class CameraView : SurfaceView {
 
@@ -32,7 +30,7 @@ class CameraView : SurfaceView {
     private var mPreviewWidth = 0
     private var mPreviewHeight = 0
 
-    lateinit private var mCameraManager: Camera2Manager
+    lateinit private var mCameraManager: ICameraManager
     private var mCameraStateListener: CameraStateListener? = null
     private var mSurfaceHolder: SurfaceHolder? = null
     private var mHandlerThread: HandlerThread? = null
@@ -96,7 +94,7 @@ class CameraView : SurfaceView {
 
         mPreferSize = Size(resolution, (resolution * mPreviewScale).toInt())
 
-        mCameraManager = Camera2Manager(context)
+        mCameraManager = Camera1Manager(context)
         mPreviewSize = mCameraManager.setPreferSize(mPreferSize)
         mPreviewWidth = mPreviewSize.width
         mPreviewHeight = mPreviewSize.height
@@ -166,8 +164,8 @@ class CameraView : SurfaceView {
     fun switchCamera() {
         stopPreview()
         mCameraManager.cameraMode = when (mCameraManager.cameraMode) {
-            Camera2Manager.CameraMode.FRONT -> Camera2Manager.CameraMode.BACK
-            Camera2Manager.CameraMode.BACK -> Camera2Manager.CameraMode.FRONT
+            CameraMode.FRONT -> CameraMode.BACK
+            CameraMode.BACK -> CameraMode.FRONT
         }
         startPreview()
     }

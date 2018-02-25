@@ -1,4 +1,4 @@
-package com.leo.cameratest.camera
+package com.facial.facialapp.camera
 
 import android.Manifest
 import android.content.Context
@@ -25,7 +25,7 @@ import com.facial.facialapp.util.ColorFormatUtil
 import java.util.ArrayList
 import java.util.HashMap
 
-class Camera2Manager(context: Context) {
+class Camera2Manager(context: Context) : ICameraManager {
 
     companion object {
         private val TAG = "Camera2Manager"
@@ -45,10 +45,6 @@ class Camera2Manager(context: Context) {
         }
     }
 
-    enum class CameraMode {
-        BACK, FRONT
-    }
-
     init {
         obtainCameraId(context)
     }
@@ -65,18 +61,12 @@ class Camera2Manager(context: Context) {
     private var mImageReader: ImageReader? = null
     private var mFrameCallback: FrameCallback? = null
     private var rotateDegree: Int = 0
+
     private var mOpeningCamera: Boolean = false
 
-    var cameraMode: CameraMode = CameraMode.FRONT
-        set(value) {
-            mCameraConfig = when (value) {
-                CameraMode.BACK -> sBackCameraConfig
-                CameraMode.FRONT -> sFrontCameraConfig
-            }
-            field = value
-        }
+    override var cameraMode: CameraMode = CameraMode.FRONT
 
-    var scale: Float = 0f // 0 - 1
+    override var scale: Float = 0f // 0 - 1
         set(value) {
             if (field != value) {
                 requestBuilder?.set(CaptureRequest.SCALER_CROP_REGION, getScaleRect(field))
@@ -259,15 +249,15 @@ class Camera2Manager(context: Context) {
         }
     }
 
-    fun setFrameCallback(callback: FrameCallback) {
+    override fun setFrameCallback(callback: FrameCallback) {
         mFrameCallback = callback
     }
 
-    fun addCallbackBuffer() {
+    override fun addCallbackBuffer() {
         // do nothing
     }
 
-    fun setPreferSize(preferSize: Size): Size {
+    override fun setPreferSize(preferSize: Size): Size {
         val previewSize: Size? = sPreviewSizeCache.get(preferSize)
         if (previewSize != null) {
             mPreviewSize = previewSize
@@ -291,11 +281,11 @@ class Camera2Manager(context: Context) {
         return CameraUtil.copySize(mPreviewSize!!)
     }
 
-    fun setOutputSurfaceHolder(surfaceHolder: SurfaceHolder) {
+    override fun setOutputSurfaceHolder(surfaceHolder: SurfaceHolder) {
         mPreviewSurfaceHolder = surfaceHolder
     }
 
-    fun openCamera(listener: CameraStateListener?) {
+    override fun openCamera(listener: CameraStateListener?) {
         Log.d(TAG, "openCamera()++")
 
         // check require permission
@@ -345,7 +335,7 @@ class Camera2Manager(context: Context) {
         Log.d(TAG, "openCamera()--")
     }
 
-    fun closeCamera() {
+    override fun closeCamera() {
         Log.d(TAG, "closeCamera()++")
         if (mOpeningCamera) {
             Log.d(TAG, "closeCamera() is opening camera")

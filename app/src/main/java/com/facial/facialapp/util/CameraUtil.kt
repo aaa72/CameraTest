@@ -79,17 +79,16 @@ object CameraUtil {
         return getFitPreviewSize(supportSizes, preferSize, preferSize.height.toFloat() / preferSize.width)
     }
 
-//    fun getFitPreviewSize(previewSizes: List<Camera.Size>?, preferSize: Size): Size {
-//        if (previewSizes == null) {
-//            return preferSize
-//        }
-//        val sizes = arrayOfNulls<Size>(previewSizes.size)
-//        for (i in previewSizes.indices) {
-//            val size = previewSizes[i]
-//            sizes[i] = Size(size.width, size.height)
-//        }
-//        return getFitPreviewSize(sizes, preferSize)
-//    }
+    fun getFitPreviewSize(previewSizes: List<Camera.Size>?, preferSize: Size): Size {
+        if (previewSizes == null) {
+            return preferSize
+        }
+        val sizes = Array(previewSizes.size) { i ->
+            val size = previewSizes[i]
+            Size(size.width, size.height)
+        }
+        return getFitPreviewSize(sizes, preferSize)
+    }
 
     fun copySize(size: Size): Size {
         return Size(size.width, size.height)

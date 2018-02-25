@@ -1,4 +1,4 @@
-package com.leo.cameratest.camera
+package com.facial.facialapp.camera
 
 import android.annotation.SuppressLint
 import android.os.Parcelable
